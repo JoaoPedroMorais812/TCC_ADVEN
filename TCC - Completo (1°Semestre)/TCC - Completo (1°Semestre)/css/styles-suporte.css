@@ -1,0 +1,390 @@
+/* Variáveis CSS para cores e tamanhos (mantendo o tema escuro) */
+:root {
+    --bg-dark: #1f2937;
+    /* Fundo principal */
+    --bg-card: #313e51;
+    /* Fundo dos cartões e painéis */
+    --text-primary: #e5e7eb;
+    /* Texto principal claro */
+    --text-secondary: #9ca3af;
+    /* Texto secundário/cinza */
+    --blue-highlight: #3b82f6;
+    /* Azul para botões e links */
+    --green-positive: #10b981;
+    /* Verde para valores positivos */
+    --red-negative: #ef4444;
+    /* Vermelho para valores negativos */
+    --input-bg: #4b5563;
+    /* Fundo dos inputs */
+    --border-color: #4b5563;
+    /* Cor da borda */
+}
+
+/* Estilos globais para o corpo da página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f172a;
+  color: #fff;
+  display: flex;
+
+}
+
+/* Contêiner principal da página de ajuda */
+.ajuda-container {
+    max-width: 900px;
+    /* Largura máxima para o conteúdo */
+    margin: 0 auto;
+    left: 270px;
+    /* Fundo do container */
+    position: relative;
+    margin-top: 30px;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* Seção de Cartões de Problema */
+.problem-type-section {
+    margin-bottom: 2.5rem;
+}
+
+.problem-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.problem-card {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.problem-card:hover {
+    background-color: #3e4b61;
+    /* Um pouco mais claro no hover */
+    transform: translateY(-3px);
+    /* Efeito de leve elevação */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--blue-highlight);
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Seção de Perguntas Frequentes (FAQ) */
+.faq-section {
+    margin-bottom: 2.5rem;
+}
+
+.faq-list {
+    background-color: var(--bg-card);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Garante que as bordas arredondadas funcionem com os itens */
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    /* Remove a borda do último item */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--text-primary);
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.faq-question:hover {
+    background-color: #3e4b61;
+}
+
+.faq-question i {
+    transition: transform 0.2s;
+}
+
+.faq-question.active i {
+    transform: rotate(180deg);
+    /* Gira o ícone quando a pergunta está ativa */
+}
+
+.faq-answer {
+    padding: 0 1.5rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+
+
+/* ------------------------------------ */
+/* SIDEBAR LATERAL                     */
+/* ------------------------------------ */
+.sidebar {
+    width: 260px;
+    background-color: #1e293b;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+  }
+  
+  /* SEPARADOR */
+  hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+    margin: 12px 20px;
+  }
+  
+  /* LOGO */
+  .logo-section {
+    padding: 0 24px;
+  }
+  
+  .logo-section h2 {
+    color: #3b82f6;
+    font-size: 22px;
+  }
+  
+  .logo-section h2 span {
+    font-weight: 300;
+    color: #fff;
+  }
+  
+  .highlight {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  
+  /* INFORMAÇÕES DO USUÁRIO */
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px 24px;
+    gap: 12px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #334155;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+  }
+  
+  .username {
+    font-weight: 600;
+  }
+  
+  .email {
+    font-size: 11px;
+    color: #cbd5e1;
+  }
+  
+  /* LINKS DE NAVEGAÇÃO */
+  .nav-links {
+    list-style: none;
+    padding: 0 12px;
+    flex: 1;
+  }
+  
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .nav-links li:hover {
+    background-color: #334155;
+  }
+  
+  .nav-links li.active {
+    background-color: #1d4ed8;
+    color: #fff;
+  }
+  
+  .nav-links i {
+    font-size: 18px;
+  }
+  
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: none;
+  }
+  
+  /* BOTÃO SAIR */
+  .logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ef4444;
+    padding: 14px 24px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .logout:hover {
+    background-color: #334155;
+  }
+  
+  .logout i {
+    font-size: 18px;
+  }
+  
+  /* ------------------------------------ */
+  /* MENU MOBILE                         */
+  /* ------------------------------------ */
+  .menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #1d4ed8;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    z-index: 1100;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* ------------------------------------ */
+  /* RESPONSIVIDADE                      */
+  /* ------------------------------------ */
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+    .menu-btn {
+      display: block;
+    }
+  }
+  
+  .badge {
+    background-color: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    margin-left: auto;
+  }
+
+  
+.faq-answer.active {
+    max-height: 200px;
+    /* Altura máxima para a transição (ajuste conforme necessário) */
+    padding: 0 1.5rem 1.5rem;
+    /* Adiciona padding quando ativo */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .ajuda-container {
+        padding: 1rem;
+    }
+
+    .problem-cards-grid {
+        grid-template-columns: 1fr;
+        /* Um cartão por linha em telas menores */
+    }
+}

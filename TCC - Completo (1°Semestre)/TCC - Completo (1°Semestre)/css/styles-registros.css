@@ -1,0 +1,447 @@
+/* Variáveis CSS para cores e tamanhos (mantendo o tema escuro) */
+:root {
+    --bg-dark: #1f2937;
+    /* Fundo principal */
+    --bg-card: #313e51;
+    /* Fundo dos cartões e painéis */
+    --text-primary: #e5e7eb;
+    /* Texto principal claro */
+    --text-secondary: #9ca3af;
+    /* Texto secundário/cinza */
+    --blue-highlight: #3b82f6;
+    /* Azul para botões e links */
+    --green-positive: #10b981;
+    /* Verde para valores positivos */
+    --red-negative: #ef4444;
+    /* Vermelho para valores negativos */
+    --input-bg: #4b5563;
+    /* Fundo dos inputs */
+    --border-color: #4b5563;
+    /* Cor da borda */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f172a;
+  color: #fff;
+  display: flex;
+   min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Contêiner principal da página de registros */
+.registros-container {
+     width: 600px; /* ou max-width: 600px; */
+  padding: 2rem;
+  background-color: var(--bg-dark);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos das Abas de Navegação */
+.tabs-navigation {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-button {
+    background-color: transparent;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent;
+    /* Para a linha de destaque */
+}
+
+.tab-button:hover {
+    color: var(--blue-highlight);
+}
+
+.tab-button.active {
+    color: var(--blue-highlight);
+    border-bottom-color: var(--blue-highlight);
+}
+
+/* Conteúdo das Abas */
+.tab-content {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    /* Esconde todas as abas por padrão */
+}
+
+.tab-content.active {
+    display: block;
+    /* Mostra a aba ativa */
+}
+
+.placeholder-text {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Estilos do Formulário de Registro */
+.registro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    /* Permite quebrar linha em telas menores */
+}
+
+.form-group {
+    flex: 1;
+    /* Faz com que os grupos ocupem o espaço disponível */
+    min-width: 280px;
+    /* Largura mínima para cada campo */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    flex: none;
+    /* Remove o flex para ocupar a largura total */
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--blue-highlight);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    /* Anel de foco azul */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+.form-group textarea {
+    resize: vertical;
+    /* Permite redimensionar verticalmente */
+    min-height: 100px;
+}
+
+/* Estilo específico para input[type="date"] */
+/* Isso é para tentar estilizar o ícone de calendário nativo, que é difícil */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    /* Inverte a cor para ser visível no tema escuro */
+    cursor: pointer;
+}
+
+input[type="date"] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%239ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+    /* Espaço para o ícone */
+}
+
+
+/* Ações do Formulário (Botão) */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    /* Alinha o botão à direita */
+    margin-top: 1rem;
+}
+
+.add-button {
+    background-color: var(--blue-highlight);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-button:hover {
+    background-color: #2563eb;
+}
+
+
+
+/* ------------------------------------ */
+/* SIDEBAR LATERAL                     */
+/* ------------------------------------ */
+.sidebar {
+    width: 260px;
+    background-color: #1e293b;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+  }
+  
+  /* SEPARADOR */
+  hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+    margin: 12px 20px;
+  }
+  
+  /* LOGO */
+  .logo-section {
+    padding: 0 24px;
+  }
+  
+  .logo-section h2 {
+    color: #3b82f6;
+    font-size: 22px;
+  }
+  
+  .logo-section h2 span {
+    font-weight: 300;
+    color: #fff;
+  }
+  
+  .highlight {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  
+  /* INFORMAÇÕES DO USUÁRIO */
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px 24px;
+    gap: 12px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #334155;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+  }
+  
+  .username {
+    font-weight: 600;
+  }
+  
+  .email {
+    font-size: 11px;
+    color: #cbd5e1;
+  }
+  
+  /* LINKS DE NAVEGAÇÃO */
+  .nav-links {
+    list-style: none;
+    padding: 0 12px;
+    flex: 1;
+  }
+  
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .nav-links li:hover {
+    background-color: #334155;
+  }
+  
+  .nav-links li.active {
+    background-color: #1d4ed8;
+    color: #fff;
+  }
+  
+  .nav-links i {
+    font-size: 18px;
+  }
+  
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: none;
+  }
+  
+  /* BOTÃO SAIR */
+  .logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ef4444;
+    padding: 14px 24px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .logout:hover {
+    background-color: #334155;
+  }
+  
+  .logout i {
+    font-size: 18px;
+  }
+  
+  /* ------------------------------------ */
+  /* MENU MOBILE                         */
+  /* ------------------------------------ */
+  .menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #1d4ed8;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    z-index: 1100;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* ------------------------------------ */
+  /* RESPONSIVIDADE                      */
+  /* ------------------------------------ */
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+    .menu-btn {
+      display: block;
+    }
+  }
+  
+  .badge {
+    background-color: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    margin-left: auto;
+  }
+
+  .link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+  
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        /* Empilha campos em telas menores */
+        gap: 1rem;
+        /* Reduz o espaçamento */
+    }
+
+    .form-group {
+        min-width: unset;
+        /* Remove largura mínima */
+        width: 100%;
+        /* Ocupa a largura total */
+    }
+
+    .registros-container {
+        padding: 1rem;
+    }
+
+    .tabs-navigation {
+        flex-wrap: wrap;
+        /* Permite que as abas quebrem linha */
+        justify-content: center;
+    }
+
+    .tab-button {
+        flex-grow: 1;
+        /* Faz as abas ocuparem o espaço */
+        text-align: center;
+    }
+}

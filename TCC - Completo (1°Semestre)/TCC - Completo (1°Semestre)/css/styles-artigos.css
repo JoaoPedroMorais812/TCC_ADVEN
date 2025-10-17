@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* ------------- */
+/* ------------------------------------ */
+/* SIDEBAR LATERAL                     */
+/* ------------------------------------ */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* SEPARADOR */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 12px 20px;
+}
+
+/* LOGO */
+.logo-section {
+  padding: 0 24px;
+}
+
+.logo-section h2 {
+  color: #3b82f6;
+  font-size: 22px;
+}
+
+.logo-section h2 span {
+  font-weight: 300;
+  color: #fff;
+}
+
+.highlight {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* INFORMAÇÕES DO USUÁRIO */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #334155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* LINKS DE NAVEGAÇÃO */
+.nav-links {
+  list-style: none;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #334155;
+}
+
+.nav-links li.active {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+.nav-links i {
+  font-size: 18px;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+}
+
+/* BOTÃO SAIR */
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ef4444;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #334155;
+}
+
+.logout i {
+  font-size: 18px;
+}
+
+/* ------------------------------------ */
+/* MENU MOBILE                         */
+/* ------------------------------------ */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+/* ------------------------------------ */
+/* RESPONSIVIDADE                      */
+/* ------------------------------------ */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}
+/* ----------------------- */
+
+
+.content {
+  flex: 1;
+  padding: 30px;
+  margin-left: 260px;
+}
+h1 {
+  margin-bottom: 20px;
+}
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.filters input,
+.filters select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: #cbd5e1;
+  flex: 1;
+}
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.card-body {
+  padding: 15px;
+}
+.card-body .categoria {
+  background: #3b82f6;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.card-body h2 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+}
+.card-body p {
+  font-size: 13px;
+  color: #94a3b8;
+}
+.card-body .meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.card-body .footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 10px;
+}

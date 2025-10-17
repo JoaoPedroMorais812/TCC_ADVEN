@@ -1,0 +1,397 @@
+/* ------------------------ */
+/* RESET GERAL E ESTRUTURA */
+/* ------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+
+.link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ------------------------------- */
+/* ÁREA PRINCIPAL: CONFIGURAÇÕES */
+/* ------------------------------- */
+.configuracoes-page {
+  padding-left: 260px; /* espaço para a sidebar fixa */
+}
+
+.configuracoes-page h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* GRID de cartões */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Cartões padrões */
+.card {
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Cartões que ocupam linha inteira */
+.card.wide {
+  flex: 1 1 100%;
+}
+
+/* Cabeçalho dos cards */
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Parágrafos e textos */
+.card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* ----------------------- */
+/* SWITCH de modo escuro */
+/* ----------------------- */
+.switch-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2563eb;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.modo-ativo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #334155;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+/* ------------------------ */
+/* CHECKLISTS DE NOTIFICAÇÃO */
+/* ------------------------ */
+.check-list label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.check-list input {
+  transform: scale(1.2);
+}
+
+/* ----------------- */
+/* SEÇÃO SEGURANÇA  */
+/* ----------------- */
+.seguranca {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* -------------------------- */
+/* SELECT: Idioma, Moeda etc */
+/* -------------------------- */
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.select-group select {
+  background-color: #334155;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* --------- */
+/* BOTÕES   */
+/* --------- */
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.verde    { background-color: #22c55e; }
+.btn.azul     { background-color: #2563eb; }
+.btn.vermelho { background-color: #dc2626; }
+.btn.cinza    { background-color: #334155; }
+.full         { width: 100%; margin-top: 10px; }
+
+/* ------------------- */
+/* SIDEBAR (LATERAL)  */
+/* ------------------- */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* LINKS DA SIDEBAR */
+.nav-links {
+  list-style: none;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #334155;
+}
+
+.nav-links li.active {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+}
+
+.nav-links i {
+  font-size: 18px;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+/* -------------- */
+/* HR SEPARADOR  */
+/* -------------- */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 12px 20px;
+}
+
+/* -------------- */
+/* LOGO DA MARCA */
+/* -------------- */
+.logo-section {
+  padding: 0 24px;
+}
+.logo-section h2 {
+  color: #3b82f6;
+  font-size: 22px;
+}
+.logo-section h2 span {
+  font-weight: 300;
+  color: #fff;
+}
+.highlight {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* ------------------ */
+/* INFORMAÇÕES USUÁRIO */
+/* ------------------ */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #334155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* ----------- */
+/* BOTÃO SAIR */
+/* ----------- */
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ef4444;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #334155;
+}
+
+.logout i {
+  font-size: 18px;
+}
+
+/* ---------------- */
+/* BOTÃO MENU MOBILE */
+/* ---------------- */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+/* --------------- */
+/* RESPONSIVIDADE */
+/* --------------- */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .configuracoes-page {
+    padding-left: 0;
+    margin-top: 80px;
+  }
+}

@@ -1,0 +1,717 @@
+
+/* Variáveis de Cores */
+:root {
+    --bg-dark: #1e1f2b;
+    --sidebar-dark: #222330;
+    --card-dark: #2c2e3e;
+    --text-light: #f0f0f0;
+    --text-muted: #a0a2ac;
+    --primary-color: #4a90e2;
+    --border-color: #3e4051;
+    --red-alert: #e84c3d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+   font-family: 'Segoe UI', sans-serif;
+  background-color: #0f172a;
+    color: var(--text-light);
+    display: flex;
+    overflow: hidden; /* Evita scroll na tela principal */
+}
+
+/* Container Principal */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Sidebar */
+
+.link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-dark);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.profile-icon .fas {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.email {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    background-color: var(--card-dark);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-header .back-link {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin-right: 20px;
+}
+
+.main-header h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.content-body {
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto; /* Permite scroll no conteúdo principal se necessário */
+}
+
+.profile-form-container {
+    background-color: var(--card-dark);
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Seções do Formulário */
+.form-section {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Campos do Formulário */
+.form-group-inline {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-end; /* Alinha os inputs ao fundo */
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-field.full-width {
+    flex: 1 1 100%;
+}
+
+.input-field label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3e4051;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.input-with-icon, .input-with-icon-right {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon i, .input-with-icon-right i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.input-with-icon-right .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    cursor: pointer;
+    z-index: 10; /* Para ser clicável */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    padding-left: 45px; /* Espaço para o ícone */
+    background-color: #1e1f2b;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-color);
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Campos de Senha */
+.password-change-section {
+    position: relative;
+}
+
+.password-change-section h3 {
+    display: inline-block;
+}
+
+.cancel-password-change {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    color: var(--red-alert);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.cancel-password-change:hover {
+    opacity: 0.8;
+}
+
+/* Botões de Ação */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background: none;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border-color);
+}
+
+
+/* ------------------- */
+/* SIDEBAR (LATERAL)  */
+/* ------------------- */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* LINKS DA SIDEBAR */
+.nav-links {
+  list-style: none;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #334155;
+}
+
+.nav-links li.active {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+}
+
+.nav-links i {
+  font-size: 18px;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+/* -------------- */
+/* HR SEPARADOR  */
+/* -------------- */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 12px 20px;
+}
+
+/* -------------- */
+/* LOGO DA MARCA */
+/* -------------- */
+.logo-section {
+  padding: 0 24px;
+}
+.logo-section h2 {
+  color: #3b82f6;
+  font-size: 22px;
+}
+.logo-section h2 span {
+  font-weight: 300;
+  color: #fff;
+}
+.highlight {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* ------------------ */
+/* INFORMAÇÕES USUÁRIO */
+/* ------------------ */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #334155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* ----------- */
+/* BOTÃO SAIR */
+/* ----------- */
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ef4444;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #334155;
+}
+
+.logout i {
+  font-size: 18px;
+}
+
+/* ---------------- */
+/* BOTÃO MENU MOBILE */
+/* ---------------- */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+/* --------------- */
+/* RESPONSIVIDADE */
+/* --------------- */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .configuracoes-page {
+    padding-left: 0;
+    margin-top: 80px;
+  }
+}
+
+
+/* ------------------- */
+/* SIDEBAR (LATERAL)  */
+/* ------------------- */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* LINKS DA SIDEBAR */
+.nav-links {
+  list-style: none;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #334155;
+}
+
+.nav-links li.active {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+}
+
+.nav-links i {
+  font-size: 18px;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+/* -------------- */
+/* HR SEPARADOR  */
+/* -------------- */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 12px 20px;
+}
+
+/* -------------- */
+/* LOGO DA MARCA */
+/* -------------- */
+.logo-section {
+  padding: 0 24px;
+}
+.logo-section h2 {
+  color: #3b82f6;
+  font-size: 22px;
+}
+.logo-section h2 span {
+  font-weight: 300;
+  color: #fff;
+}
+.highlight {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* ------------------ */
+/* INFORMAÇÕES USUÁRIO */
+/* ------------------ */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #334155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* ----------- */
+/* BOTÃO SAIR */
+/* ----------- */
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ef4444;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #334155;
+}
+
+.logout i {
+  font-size: 18px;
+}
+
+/* ---------------- */
+/* BOTÃO MENU MOBILE */
+/* ---------------- */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+/* --------------- */
+/* RESPONSIVIDADE */
+/* --------------- */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .configuracoes-page {
+    padding-left: 0;
+    margin-top: 80px;
+  }
+}
+
+
+/* Responsividade Básica (para telas menores que o print) */
+
+
+@media (max-width: 768px) {
+    .form-group-inline {
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+    }
+
+    .form-group-inline .input-field {
+        margin-bottom: 15px;
+    }
+
+    .form-group-inline .profile-avatar {
+        margin-bottom: 15px;
+    }
+
+    .profile-form-container {
+        padding: 20px;
+    }
+}
