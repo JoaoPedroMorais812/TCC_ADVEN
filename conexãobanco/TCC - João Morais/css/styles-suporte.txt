@@ -1,0 +1,204 @@
+/* Variáveis CSS para cores e tamanhos (mantendo o tema escuro) */
+:root {
+  --bg-dark: #1f2937;
+  /* Fundo principal */
+  --bg-card: #313e51;
+  /* Fundo dos cartões e painéis */
+  --text-primary: #e5e7eb;
+  /* Texto principal claro */
+  --text-secondary: #9ca3af;
+  /* Texto secundário/cinza */
+  --blue-highlight: #3b82f6;
+  /* Azul para botões e links */
+  --green-positive: #10b981;
+  /* Verde para valores positivos */
+  --red-negative: #ef4444;
+  /* Vermelho para valores negativos */
+  --input-bg: #4b5563;
+  /* Fundo dos inputs */
+  --border-color: #4b5563;
+  /* Cor da borda */
+}
+
+/* Estilos globais para o corpo da página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  /* Usando uma fonte moderna com fallback */
+  background: linear-gradient(135deg, #0f172a, #1a2a3a);
+  /* Gradiente sutil para o fundo */
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Contêiner principal da página de ajuda */
+.ajuda-container {
+  max-width: 900px;
+  width: 100%;
+  background-color: var(--bg-dark);
+  padding: 2.5rem;
+  /* Aumentado o padding para mais espaço */
+  border-radius: 1rem;
+  /* Borda mais arredondada */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  /* Sombra mais suave e proeminente */
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--blue-highlight);
+  /* Título em destaque com a cor azul */
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  /* Linha de separação */
+  padding-bottom: 0.5rem;
+}
+
+/* Seção de Cartões de Problema */
+.problem-type-section {
+  margin-bottom: 3rem;
+}
+
+.problem-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.problem-card {
+  background-color: var(--bg-card);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+}
+
+.problem-card:hover {
+  background-color: #3e4b61;
+  transform: translateY(-5px) scale(1.02);
+  /* Efeito mais dinâmico */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: var(--blue-highlight);
+  /* Borda destacada no hover */
+}
+
+.card-icon {
+  font-size: 3rem;
+  /* Aumentado o tamanho do ícone */
+  color: var(--blue-highlight);
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Seção de Perguntas Frequentes (FAQ) */
+.faq-section {
+  margin-bottom: 2.5rem;
+}
+
+.faq-list {
+  background-color: var(--bg-card);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  border: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.faq-question:hover {
+  background-color: #3e4b61;
+  color: var(--blue-highlight);
+  /* Destaque na cor do texto no hover */
+}
+
+.faq-question i {
+  transition: transform 0.2s;
+}
+
+.faq-question.active i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 1.5rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.faq-answer.active {
+  max-height: 200px;
+  padding: 0 1.5rem 1.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .ajuda-container {
+    padding: 1.5rem;
+  }
+
+  .problem-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

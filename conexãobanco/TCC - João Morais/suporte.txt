@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Ajuda e Suporte</title>
+  <!-- Link para o Tailwind CSS (para classes utilitárias) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <!-- Link para o Font Awesome (para ícones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Link para o arquivo CSS de estilos, que você vai criar -->
+  <link rel="stylesheet" href="style-suporte.css">
+</head>
+
+<body class="dark">
+  <div class="ajuda-container">
+    <h1 class="page-title">Central de Ajuda e Suporte</h1>
+    <p class="page-subtitle">Relate problemas técnicos ou tire suas dúvidas conosco</p>
+
+    <!-- Seção: Selecione o tipo de problema -->
+    <section class="problem-type-section">
+      <h2 class="section-title">Selecione o tipo de problema:</h2>
+      <div class="problem-cards-grid">
+        <div class="problem-card" data-problem-type="desempenho">
+          <i class="fas fa-bolt card-icon"></i>
+          <h3 class="card-title">Problemas de Desempenho</h3>
+          <p class="card-description">Travamentos, lentidão, páginas que não carregam</p>
+        </div>
+        <div class="problem-card" data-problem-type="conexao">
+          <i class="fas fa-unlink card-icon"></i>
+          <h3 class="card-title">Problemas de Conexão</h3>
+          <p class="card-description">Dados que não carregam, erros de sincronização</p>
+        </div>
+        <div class="problem-card" data-problem-type="outros">
+          <i class="fas fa-question card-icon"></i>
+          <h3 class="card-title">Outros Problemas</h3>
+          <p class="card-description">Dúvidas, sugestões ou outros tipos de problema</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção: Perguntas Frequentes -->
+    <section class="faq-section">
+      <h2 class="section-title">Perguntas Frequentes</h2>
+      <div class="faq-list" id="faq-list">
+        <!-- FAQs serão preenchidas via JavaScript -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Seus arquivos JavaScript -->
+  <script src="Js/app-ajuda.js"></script>
+</body>
+
+</html>
