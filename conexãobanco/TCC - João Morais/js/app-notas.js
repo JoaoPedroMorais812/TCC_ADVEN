@@ -125,8 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função principal para buscar e renderizar todos os dados
     const fetchData = async () => {
         try {
-            // Requisição ao seu script PHP (caminho atualizado para a pasta 'backend')
-            const response = await fetch('data-notas.php');
+            // Monta querystring a partir dos filtros (se existirem)
+            const params = new URLSearchParams();
+            const periodoEl = document.getElementById('filter-periodo');
+            const fonteEl = document.getElementById('filter-fonte');
+            const startEl = document.getElementById('filter-start');
+            const endEl = document.getElementById('filter-end');
+
+            if (periodoEl && periodoEl.value) params.set('periodo', periodoEl.value);
+            if (fonteEl && fonteEl.value) params.set('fonte', fonteEl.value);
+            if (startEl && startEl.value) params.set('start', startEl.value);
+            if (endEl && endEl.value) params.set('end', endEl.value);
+
+            const url = 'data-notas.php' + (params.toString() ? ('?' + params.toString()) : '');
+
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -148,8 +161,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Quando filtros mudarem, refaz a requisição imediatamente
+    ['filter-periodo', 'filter-fonte', 'filter-start', 'filter-end'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', () => { fetchData(); });
+    });
+
+    // Intervalo de polling configurável (ms). Pode ser ajustado via atributo data-poll-interval-ms no elemento <body>
+    const DEFAULT_POLL_MS = 10000; // 10s
+    const bodyEl = document.body || document.documentElement;
+    let POLL_INTERVAL_MS = DEFAULT_POLL_MS;
+    if (bodyEl && bodyEl.dataset && bodyEl.dataset.pollIntervalMs) {
+        const v = parseInt(bodyEl.dataset.pollIntervalMs, 10);
+        if (!isNaN(v) && v >= 5000 && v <= 60000) POLL_INTERVAL_MS = v; // valida e clampa
+    }
+
+    let pollIntervalId = null;
+
+    // start/stop polling helpers
+    const startPolling = () => {
+        stopPolling();
+        pollIntervalId = setInterval(fetchData, POLL_INTERVAL_MS);
+    };
+
+    const stopPolling = () => {
+        if (pollIntervalId) {
+            clearInterval(pollIntervalId);
+            pollIntervalId = null;
+        }
+    };
+
+    // Page Visibility API: pausa polling quando a aba não estiver visível
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopPolling();
+        } else {
+            // ao voltar, busca imediatamente e reinicia o polling
+            fetchData();
+            startPolling();
+        }
+    });
+
     // Chama a função para carregar os dados assim que o DOM estiver pronto
     fetchData();
+    startPolling();
 
     // Exemplo de funcionalidade de pesquisa (apenas filtragem no frontend)
     const searchInput = document.getElementById('search-input');

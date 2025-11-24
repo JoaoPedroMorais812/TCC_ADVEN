@@ -389,6 +389,14 @@ input[type="date"] {
   padding-right: 2.5rem;
 }
 
+.clear-button{
+background:#c82333;
+color:#fff;
+border:none;
+padding:8px 12px;
+border-radius:4px;
+margin-left:8px;}
+
 /* Ações do Formulário (Botão) */
 .form-actions {
   display: flex;
@@ -412,6 +420,53 @@ input[type="date"] {
 
 .add-button:hover {
   background-color: #2563eb;
+}
+
+/* Botão limpar: mesma tipografia/altura do botão adicionar, mas cor vermelha */
+.clear-button {
+  background-color: var(--red-negative);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clear-button:hover {
+  background-color: #b91c1c; /* tom um pouco mais escuro */
+}
+
+/* Icon inside buttons */
+.clear-button i,
+.add-button i {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+/* small wrapper for button text if needed */
+.btn-text { display: inline-block; }
+
+/* Simple fade in/out utility for alerts/messages */
+.fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
+.fade-out {
+  animation: fadeOut 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-6px); }
 }
 
 /* ------------------------------------ */

@@ -55,6 +55,9 @@ if ($data_venc === '' || $data_venc === null) {
 if ($valor === '' || !is_numeric($valor)) {
     $errors[] = 'O valor informado é inválido.';
 }
+if ($recorrencia === '') {
+    $errors[] = 'O campo Recorrência é obrigatório.';
+}
 
 if (!empty($errors)) {
     respond(['success' => false, 'message' => implode(' ', $errors)], $isAjax);
@@ -106,10 +109,14 @@ try {
 
     // Só inclui detalhes de exceção quando APP_DEBUG=1 no ambiente
     $appDebug = getenv('APP_DEBUG') === '1';
-    $resp = ['success' => false, 'message' => 'Erro ao salvar registro. Verifique o log do servidor.'];
-    if ($appDebug) {
-        $resp['error'] = $e->getMessage();
-        $resp['trace'] = $e->getTraceAsString();
-    }
+        // Debug controlado por variável de ambiente APP_DEBUG (1 para habilitar). Não usar querystring em produção.
+        $appDebug = getenv('APP_DEBUG');
+        $debugEnabled = $appDebug !== false && ($appDebug === '1' || strtolower($appDebug) === 'true');
+
+        $resp = ['success' => false, 'message' => 'Erro ao salvar registro. Verifique o log do servidor.'];
+        if ($debugEnabled) {
+            $resp['error'] = $e->getMessage();
+            $resp['trace'] = $e->getTraceAsString();
+        }
     respond($resp, $isAjax);
 }

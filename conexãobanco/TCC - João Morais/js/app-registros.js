@@ -83,6 +83,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 data[key] = value;
             });
 
+            // Validação local: recorrência obrigatória
+            const fd = new FormData(debitoForm);
+            const recorrCheck = (fd.get('recorrencia') || '').toString().trim();
+            if (!recorrCheck) {
+                const msgElLocal = document.getElementById('registro-msg');
+                if (msgElLocal) {
+                    msgElLocal.style.display = 'block';
+                    msgElLocal.style.color = '#8b0000';
+                    msgElLocal.textContent = 'O campo Recorrência é obrigatório.';
+                } else {
+                    showAlert('O campo Recorrência é obrigatório.', 'error');
+                }
+                return; // não prosseguir com envio
+            }
+
             console.log('Dados do formulário a serem enviados:', data);
 
             try {
@@ -105,25 +120,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     // se não for JSON, tenta ler como texto para ajudar no debug
                     const text = await response.text();
                     console.error('Resposta não-JSON do servidor:', text);
-                    throw new Error('Resposta inesperada do servidor');
+                    showAlert('Resposta inesperada do servidor.', 'error');
+                    return; // não processa mais
                 }
                 console.log('Resposta do servidor:', result);
 
                 const msgEl = document.getElementById('registro-msg');
-                const listContainer = document.getElementById('registro-list-container');
                 const listBody = document.querySelector('#registro-list tbody');
 
                 if (result.success) {
                     // mostra mensagem de sucesso
                     if (msgEl) {
+                        // use registro-msg as semantic container, but visually use alert-box
                         msgEl.style.display = 'block';
-                        msgEl.style.color = '#0b6623';
-                        msgEl.textContent = result.message || 'Registro adicionado com sucesso!';
+                        msgEl.textContent = result.message || 'Registro adicionado com sucesso.';
+                        msgEl.classList.remove('fade-out');
+                        msgEl.classList.add('fade-in');
                     }
+                    showAlert(result.message || 'Registro adicionado com sucesso.', 'success');
 
                     // se o backend retornou o id e/ou o record, insere na tabela dinamicamente
-                    if (listContainer && listBody) {
-                        listContainer.style.display = 'block';
+                    if (listBody) {
+                        // ensure container is visible
+                        const listContainer = document.getElementById('registro-list-container') || document.querySelector('#registro-list').closest('div');
+                        if (listContainer) listContainer.style.display = 'block';
                         const id = result.id || '';
                         const rec = result.record || {};
                         const row = document.createElement('tr');
@@ -131,14 +151,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         const valor = rec.reg_Valor || document.getElementById('valor')?.value || '';
                         const data = rec.reg_Data || document.getElementById('data-vencimento')?.value || '';
                         const cat = rec.reg_idNatureza || document.getElementById('categoria')?.value || '';
-                        row.innerHTML = `<td>${id}</td><td>${escapeHtml(nome)}</td><td>${escapeHtml(valor)}</td><td>${escapeHtml(data)}</td><td>${escapeHtml(cat)}</td>`;
+                        const recorr = rec.reg_idRecorrencia || document.getElementById('recorrencia')?.value || '';
+                        const obs = rec.reg_Descricao || document.getElementById('observacoes')?.value || '';
+                        row.innerHTML = `<td style="padding:6px">${escapeHtml(id)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(nome)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(valor)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(data)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(cat)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(recorr)}</td>` +
+                                        `<td style="padding:6px">${escapeHtml(obs)}</td>`;
                         listBody.insertBefore(row, listBody.firstChild);
                     }
 
                     debitoForm.reset(); // Limpa o formulário após o sucesso
 
-                    // limpa mensagem após alguns segundos
-                    setTimeout(() => { if (msgEl) msgEl.style.display = 'none'; }, 5000);
+                    // limpa mensagem após alguns segundos (fade out)
+                    setTimeout(() => {
+                        if (msgEl) {
+                            msgEl.classList.remove('fade-in');
+                            msgEl.classList.add('fade-out');
+                            setTimeout(() => { msgEl.style.display = 'none'; msgEl.textContent = ''; }, 250);
+                        }
+                    }, 4000);
                 } else {
                     if (msgEl) {
                         msgEl.style.display = 'block';
@@ -146,20 +180,91 @@ document.addEventListener('DOMContentLoaded', () => {
                         const detailed = result.error ? ' Detalhes: ' + result.error : '';
                         msgEl.textContent = (result.message || 'Erro ao salvar.') + detailed;
                     } else {
-                        alert(result.message || 'Erro ao salvar.');
+                        showAlert(result.message || 'Erro ao salvar.', 'error');
                     }
                 }
 
             } catch (error) {
                 console.error('Erro ao enviar o formulário:', error);
-                alert('Ocorreu um erro de conexão. Tente novamente.');
+                showAlert('Ocorreu um erro de conexão. Tente novamente.', 'error');
             }
         });
+        // botão limpar: reseta o formulário e esconde mensagens
+        const limparBtn = document.getElementById('limpar-button');
+        if (limparBtn) {
+            limparBtn.addEventListener('click', () => {
+                // Reset native form first
+                debitoForm.reset();
+
+                // Ensure specific defaults
+                const categoria = document.getElementById('categoria');
+                if (categoria) categoria.value = '';
+                const recorrencia = document.getElementById('recorrencia');
+                if (recorrencia) recorrencia.value = 'sem-recorrencia';
+                const status = document.getElementById('status');
+                if (status) status.value = 'pendente';
+                const valor = document.getElementById('valor');
+                if (valor) valor.value = '0.00';
+
+                // Clear inline messages and alert box
+                const msgEl = document.getElementById('registro-msg');
+                if (msgEl) {
+                    msgEl.style.display = 'none';
+                    msgEl.textContent = '';
+                    msgEl.style.color = '';
+                }
+                const alertBox = document.getElementById('alert-box');
+                if (alertBox) {
+                    alertBox.style.display = 'none';
+                    alertBox.textContent = '';
+                    alertBox.style.background = '';
+                    alertBox.style.color = '';
+                    alertBox.style.border = '';
+                }
+
+                // Clear dynamic list
+                const listBody = document.querySelector('#registro-list tbody');
+                if (listBody) listBody.innerHTML = '';
+                const listContainer = document.getElementById('registro-list-container');
+                if (listContainer) listContainer.style.display = 'none';
+
+                // Remove any validation error outlines
+                const invalids = debitoForm.querySelectorAll('.is-invalid');
+                invalids.forEach(el => el.classList.remove('is-invalid'));
+
+                // Focus first field
+                document.getElementById('nome-descricao')?.focus();
+            });
+        }
     }
 
     // utilitário simples para evitar XSS ao inserir HTML
     function escapeHtml(str) {
         if (str === null || str === undefined) return '';
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function showAlert(message, type = "success") {
+        const box = document.getElementById('alert-box');
+
+        if (!box) return;
+
+        box.style.display = 'block';
+        box.textContent = message;
+
+        if (type === "success") {
+            box.style.background = "#d4edda";
+            box.style.color = "#155724";
+            box.style.border = "1px solid #c3e6cb";
+        } else if (type === "error") {
+            box.style.background = "#f8d7da";
+            box.style.color = "#721c24";
+            box.style.border = "1px solid #f5c6cb";
+        }
+
+        // some após alguns segundos
+        setTimeout(() => {
+            box.style.display = 'none';
+        }, 4000);
     }
 });

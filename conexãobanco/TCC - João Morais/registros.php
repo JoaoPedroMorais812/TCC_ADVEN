@@ -8,7 +8,7 @@
     <!-- Link para o Tailwind CSS (para classes utilitárias) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Links para os seus arquivos de estilos personalizados -->
-    <link rel="stylesheet" href="css/styles-registros.css">
+    <link rel="stylesheet" href="css/style-registro.css">
     <link rel="shortcut icon" href="./image/Logo.jpeg" type="image/x-icon">
 
 </head>
@@ -73,12 +73,12 @@
 
     <!-- Conteúdo original de registros.html começa aqui -->
 
-   
+
 
     <!-- Conteúdo da Aba de Débitos -->
 
     <div class="cont-prin">
-         <h1 class="page-title">Registros</h1>
+        <h1 class="page-title">Registros</h1>
 
         <!-- Área de mensagem (sucesso/erro) -->
         <div id="registro-msg" role="status" aria-live="polite" style="display:none; margin-bottom:1rem;"></div>
@@ -88,13 +88,19 @@
             <h3>Registros recentes</h3>
             <table id="registro-list" class="registro-table">
                 <thead>
-                    <tr><th>ID</th><th>Nome</th><th>Valor</th><th>Data</th><th>Categoria</th></tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                    </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
 
-    <form id="debito-form" class="registro-form" action="Php/process-registro.php" method="post">
+        <form id="debito-form" class="registro-form" action="Php/process-registro.php" method="post">
             <div class="form-row">
                 <div class="form-group">
                     <label for="nome-descricao">Nome/Descrição *</label>
@@ -128,34 +134,31 @@
                     </select>
                 </div>
 
-            <div class="form-group full-width">
-                <label for="observacoes">Observações</label>
-                <textarea id="observacoes" name="observacoes" placeholder="Observações adicionais..."></textarea>
-            </div>
+                <div class="form-group full-width">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" placeholder="Observações adicionais..."></textarea>
+                </div>
 
-            <div class="form-actions">
-                <button type="submit" class="add-button">
-                    <i class="fas fa-plus"></i> Adicionar Registro
-                </button>
-            </div>
+                <div class="form-actions">
+                    <button type="submit" class="add-button">
+                        <i class="fas fa-plus"></i> Adicionar Registro
+                    </button>
+                    <button type="button" id="limpar-button" class="clear-button" >
+                        Limpar
+                    </button>
+                </div>
         </form>
 
+        <!-- Área de notificação e lista de registros (inserida dinamicamente) -->
+        <div id="registro-msg" aria-live="polite" style="margin-top:1rem; display:none; padding:10px; border-radius:4px;"></div>
+
+
 
     </div>
 
-    <!-- Conteúdo das outras abas (vazio por enquanto) -->
-    <div id="ganhos-tab-content" class="tab-content">
-        <p class="placeholder-text">Conteúdo para Ganhos...</p>
-    </div>
-    <div id="adicionais-tab-content" class="tab-content">
-        <p class="placeholder-text">Conteúdo para Adicionais...</p>
-    </div>
-    <div id="investimentos-tab-content" class="tab-content">
-        <p class="placeholder-text">Conteúdo para Investimentos...</p>
-    </div>
 
     <!-- Conteúdo original de registros.html termina aqui -->
-
+    <div id="alert-box"></div>
 
     <!-- Seu arquivo JavaScript -->
     <script src="js/app-registros.js"></script>
