@@ -1,22 +1,27 @@
 <?php
-/**
- * process-registro.php
- * Recebe POST do formulário de registros e grava na tabela `registros`.
- * Retorna JSON quando a requisição for AJAX/Accept: application/json, senão redireciona de volta.
- */
 
-// Detecta requisição
+// -----------------------------------------------------------------------------
+// Aceita apenas POST
+// -----------------------------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// Determina se a resposta deve ser JSON
-$isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
-    || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
+// -----------------------------------------------------------------------------
+// Deve responder em JSON?
+// -----------------------------------------------------------------------------
+$isAjax =
+    (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+    ||
+    (isset($_SERVER['HTTP_ACCEPT']) &&
+        strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 
-// Função utilitária para resposta
+// -----------------------------------------------------------------------------
+// Função utilitária de resposta
+// -----------------------------------------------------------------------------
 function respond($data, $isJson = true)
 {
     if ($isJson) {
@@ -24,99 +29,118 @@ function respond($data, $isJson = true)
         echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         exit;
     }
-    // fallback: redireciona para página anterior
-    $redirect = '/registros.php';
-    if (!empty($data['success'])) {
-        header('Location: ' . $redirect . '?success=1');
-    } else {
-        $msg = urlencode($data['message'] ?? 'Erro');
-        header('Location: ' . $redirect . '?error=' . $msg);
-    }
+
+    header('Location: /registros.php');
     exit;
 }
 
-// Recebe e sanitiza dados
-$nome = trim($_POST['nome_descricao'] ?? '');
-$valorRaw = trim($_POST['valor'] ?? '0');
-$valor = str_replace(',', '.', $valorRaw);
-$data_venc = $_POST['data_vencimento'] ?? null;
-$categoria = trim($_POST['categoria'] ?? '');
-$recorrencia = trim($_POST['recorrencia'] ?? '');
-$observacoes = trim($_POST['observacoes'] ?? '');
+// -----------------------------------------------------------------------------
+// Recebe e sanitiza
+// -----------------------------------------------------------------------------
+$nome         = trim($_POST['nome_descricao'] ?? '');
+$valorRaw     = trim($_POST['valor'] ?? '0');
+$valor        = str_replace(',', '.', $valorRaw);
+$data_venc    = $_POST['data_vencimento'] ?? null;
+$categoria    = trim($_POST['categoria'] ?? '');
+$recorrencia  = trim($_POST['recorrencia'] ?? '');
+$observacoes  = trim($_POST['observacoes'] ?? '');
 
-// Validações básicas
+// -----------------------------------------------------------------------------
+// ✔ Regras automáticas de IDs
+//    (AGORA USANDO OS VALORES QUE O JS REALMENTE ENVIA)
+// -----------------------------------------------------------------------------
+
+// Categoria
+switch (strtolower($categoria)) {
+    case 'debito':
+        $categoria = 1;  // ID correto na tbl_natureza
+        break;
+
+    case 'credito':
+        $categoria = 2;
+        break;
+
+    default:
+        $categoria = 3; // Outros
+        break;
+}
+
+// Recorrência
+switch (strtolower($recorrencia)) {
+    case 'diario':
+        $recorrencia = 6;   // ID 6 na tbl_recorrencia
+        break;
+
+    case 'semanal':
+        $recorrencia = 2;
+        break;
+
+    case 'mensal':
+        $recorrencia = 3;
+        break;
+
+    case 'anual':
+        $recorrencia = 4;
+        break;
+
+    default:
+        $recorrencia = 1; // Sem recorrência
+        break;
+}
+
+// -----------------------------------------------------------------------------
+// Validações
+// -----------------------------------------------------------------------------
 $errors = [];
+
 if ($nome === '') {
     $errors[] = 'O campo Nome/Descrição é obrigatório.';
 }
-if ($data_venc === '' || $data_venc === null) {
+
+if (empty($data_venc)) {
     $errors[] = 'A data de publicação é obrigatória.';
 }
+
 if ($valor === '' || !is_numeric($valor)) {
     $errors[] = 'O valor informado é inválido.';
-}
-if ($recorrencia === '') {
-    $errors[] = 'O campo Recorrência é obrigatório.';
 }
 
 if (!empty($errors)) {
     respond(['success' => false, 'message' => implode(' ', $errors)], $isAjax);
 }
 
-// Insere no banco usando PDO
+// -----------------------------------------------------------------------------
+// Inserção
+// -----------------------------------------------------------------------------
 try {
-    include_once __DIR__ . '/db.php'; // cria $pdo
+    include_once __DIR__ . '/db.php';
 
-    $sql = "INSERT INTO tbl_registro (reg_Nome, reg_Descricao, reg_Data, reg_Valor, reg_idNatureza, reg_idRecorrencia)
-            VALUES (:nome, :descricao, :data, :valor, :natureza, :recorrencia)";
+    $sql = "INSERT INTO tbl_registro 
+           (reg_Nome, reg_Descricao, reg_Data, reg_Valor, reg_idNatureza, reg_idRecorrencia)
+           VALUES
+           (:nome, :descricao, :data, :valor, :natureza, :recorrencia)";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
-    $stmt->bindValue(':descricao', $observacoes, PDO::PARAM_STR);
-    $stmt->bindValue(':data', $data_venc, PDO::PARAM_STR);
-    $stmt->bindValue(':valor', (float)$valor, PDO::PARAM_STR);
-    $stmt->bindValue(':natureza', $categoria, PDO::PARAM_STR);
-    $stmt->bindValue(':recorrencia', $recorrencia, PDO::PARAM_STR);
+
+    $stmt->bindValue(':nome', $nome);
+    $stmt->bindValue(':descricao', $observacoes);
+    $stmt->bindValue(':data', $data_venc);
+    $stmt->bindValue(':valor', $valor);
+    $stmt->bindValue(':natureza', $categoria);
+    $stmt->bindValue(':recorrencia', $recorrencia);
 
     $stmt->execute();
 
-    // Último id inserido
-    $lastId = $pdo->lastInsertId();
-
-    // determina se estamos em modo debug via variável de ambiente APP_DEBUG
-    $appDebug = getenv('APP_DEBUG') === '1';
-
-    $response = ['success' => true, 'message' => 'Registro adicionado com sucesso.', 'id' => $lastId];
-
-    // se quisermos, em modo debug retornamos também o registro recém-inserido
-    if ($appDebug) {
-        try {
-            $sel = $pdo->prepare('SELECT * FROM tbl_registro WHERE id = :id');
-            $sel->bindValue(':id', $lastId, PDO::PARAM_INT);
-            $sel->execute();
-            $response['record'] = $sel->fetch(PDO::FETCH_ASSOC);
-        } catch (Exception $inner) {
-            // não falha a resposta principal se o select falhar
-            error_log('process-registro fetch error: ' . $inner->getMessage());
-        }
-    }
-
-    respond($response, $isAjax);
-
+    respond([
+        'success' => true,
+        'message' => 'Registro adicionado com sucesso.'
+    ], $isAjax);
 } catch (Exception $e) {
-    // Registra o erro no log do servidor
-    error_log('process-registro error: ' . $e->getMessage());
 
-    // Só inclui detalhes de exceção quando APP_DEBUG=1 no ambiente
-    $appDebug = getenv('APP_DEBUG') === '1';
-        // Debug controlado por variável de ambiente APP_DEBUG (1 para habilitar). Não usar querystring em produção.
-        $appDebug = getenv('APP_DEBUG');
-        $debugEnabled = $appDebug !== false && ($appDebug === '1' || strtolower($appDebug) === 'true');
+    error_log('Erro ao inserir registro: ' . $e->getMessage());
 
-        $resp = ['success' => false, 'message' => 'Erro ao salvar registro. Verifique o log do servidor.'];
-        if ($debugEnabled) {
-            $resp['error'] = $e->getMessage();
-            $resp['trace'] = $e->getTraceAsString();
-        }
-    respond($resp, $isAjax);
+    respond([
+        'success' => false,
+        'message' => 'Erro ao salvar registro. Verifique o log do servidor.'
+    ], $isAjax);
 }

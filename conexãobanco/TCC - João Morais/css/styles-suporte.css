@@ -66,11 +66,14 @@ body {
 .problem-type-section {
   margin-bottom: 3rem;
 }
+
 .problem-cards-grid {
   display: flex;
   gap: 1.5rem;
-  justify-content: space-between; /* Distribui os cards igualmente */
-  flex-wrap: nowrap; /* NÃO quebra linha em telas grandes */
+  justify-content: space-between;
+  /* Distribui os cards igualmente */
+  flex-wrap: nowrap;
+  /* NÃO quebra linha em telas grandes */
 }
 
 .problem-card {
@@ -394,13 +397,18 @@ hr {
     grid-template-columns: 1fr;
     /* Um cartão por linha em telas menores */
   }
-}@media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
   .problem-cards-grid {
-    flex-wrap: wrap; /* Agora os cards podem quebrar linha */
-    justify-content: center; /* Centraliza os cards ao quebrar */
+    flex-wrap: wrap;
+    /* Agora os cards podem quebrar linha */
+    justify-content: center;
+    /* Centraliza os cards ao quebrar */
   }
 
   .problem-card {
-    flex: 1 1 100%; /* Ocupa toda a largura no mobile */
+    flex: 1 1 100%;
+    /* Ocupa toda a largura no mobile */
   }
 }

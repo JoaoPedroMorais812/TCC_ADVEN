@@ -28,7 +28,7 @@
     <ul class="nav-links">
       <li><a href="dashboard.php"><i class="bi bi-bar-chart"></i><span>Dashboard</span></a></li>
       <li><a href="registros.php"><i class="bi bi-file-earmark-text"></i><span>Registros</span></a></li>
-      <li><a href="notas.php"><i class="bi bi-graph-up-arrow"></i><span>Receitas</span></a></li>
+      <li><a href="historico.php"><i class="bi bi-graph-up-arrow"></i><span>Receitas</span></a></li>
       <li><a href="agenda.php"><i class="bi bi-calendar-week"></i><span>Agenda</span></a></li>
       <li><a href="bloco.php"><i class="bi bi-file-earmark"></i><span>Bloco de Notas</span></a></li>
       <li><a href="artigos.php"><i class="bi bi-book"></i><span>Artigos</span></a></li>
