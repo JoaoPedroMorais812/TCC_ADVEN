@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = "br612.hostgator.com.br";
-    private $db_name = "hubsap45_bd_tcc_2025_adven";   
-    private $username = "hubsap45_tcc_2025_usradven";       
-    private $password = "Od!nsEye!77";          
+    private $host = "localhost";
+    private $db_name = "ADVEN";   
+    private $username = "root";       
+    private $password = " ";          
     private $conn;
 
     public function getConnection() {
