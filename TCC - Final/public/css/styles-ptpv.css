@@ -1,0 +1,239 @@
+.back-arrow {
+  display: block;
+  margin: 10px 0 0 20px;
+  font-size: 1.5rem;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  left: 23%;
+  width: 40px;
+}
+
+.back-arrow:hover {
+  color: #fff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1c2532;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #2a3545;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #2a3545;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+}
+
+.nav-links a.active {
+  color: #60a5fa;
+}
+
+.nav-auth a {
+  margin-left: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.btn-secondary {
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+}
+
+
+/* === Política de Privacidade === */
+.privacy-container {
+  max-width: 768px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #1e2833;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.privacy-container h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.privacy-container h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+.privacy-container p,
+.privacy-container li {
+  font-size: 0.95rem;
+  color: #dcdcdc;
+}
+
+.privacy-container ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.privacy-container li {
+  list-style-type: disc;
+  margin-bottom: 8px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .privacy-container {
+    margin: 40px 16px;
+    padding: 24px;
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: #121923;
+  text-align: center;
+  padding: 1.5rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* Call-to-action azul antes do rodapé */
+.cta {
+  background-color: #1d3fc1;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.cta p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.cta .btn-primary {
+  background-color: #fff;
+  color: #1d3fc1;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.cta .btn-primary:hover {
+  background-color: #e6e6e6;
+}
+
+/* Rodapé extendido */
+.footer-extended {
+  background-color: #0d111a;
+  color: #c5d1e0;
+  padding: 60px 20px 30px;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  gap: 40px;
+}
+
+.footer-brand {
+  flex: 1 1 300px;
+}
+
+.footer-brand h4 {
+  font-size: 1.5rem;
+  color: #4c9eff;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-brand i {
+  margin-right: 8px;
+}
+
+.footer-links {
+  flex: 1 1 160px;
+}
+
+.footer-links h5 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.footer-links a {
+  display: block;
+  color: #c5d1e0;
+  text-decoration: none;
+  margin: 6px 0;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #4c9eff;
+}
+
+.footer-bottom {
+  border-top: 1px solid #2a2f3b;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #7e8ba0;
+}

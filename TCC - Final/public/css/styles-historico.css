@@ -1,0 +1,581 @@
+/* =========================================================
+   VARIÁVEIS DO TEMA ESCURO
+   ========================================================= */
+:root {
+  --bg-dark: #0f172a;
+  --bg-panel: #1e293b;
+  --bg-hover: #334155;
+  --bg-card: #263042;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+
+  --blue: #3b82f6;
+  --blue-hover: #2563eb;
+
+  --green: #10b981;
+  --red: #ef4444;
+
+  --border: #4b5563;
+
+  --radius: 8px;
+  --sidebar-width: 260px;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f172a;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f1f5f9;
+}
+
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #334155;
+}
+
+.nav-links li.active {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links i {
+  font-size: 18px;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 12px 20px;
+}
+
+.logo-section {
+  padding: 0 24px;
+}
+
+.logo-section h2 {
+  color: #3b82f6;
+  font-size: 22px;
+}
+
+.logo-section h2 span {
+  font-weight: 300;
+  color: #fff;
+}
+
+.highlight {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #334155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ef4444;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #334155;
+}
+
+.logout i {
+  font-size: 18px;
+}
+
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  z-index: 1100;
+  cursor: pointer;
+  display: none;
+}
+
+
+.link-limpo {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .configuracoes-page {
+    padding-left: 0;
+    margin-top: 80px;
+  }
+}
+
+/* =========================================================
+   ÁREA PRINCIPAL
+   ========================================================= */
+.cont-prin {
+  width: 80%;
+  margin-left: var(--sidebar-width);
+  padding: 20px;
+  margin-top: 30px;
+  position: relative;
+}
+
+.header-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  position: relative;
+  margin-top: 30px;
+}
+
+/* =========================================================
+   REMOVER COMPLETAMENTE OS WIDGETS (CARDS)
+   ========================================================= */
+.widgets-container {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* =========================================================
+   BARRA DE FILTROS
+   ========================================================= */
+.filter-bar {
+  background: var(--bg-panel);
+  border-radius: var(--radius);
+  padding: 15px;
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  position: relative;
+  flex: 1;
+}
+
+.search-input input {
+  width: 100%;
+  background: var(--bg-card);
+  border: none;
+  padding: 10px 15px 10px 40px;
+  border-radius: var(--radius);
+  color: white;
+}
+
+
+
+.search-input i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+/*novos filtros*/
+/* Ícones dentro dos inputs */
+.input-icon {
+  padding-left: 38px !important;
+  position: relative;
+}
+
+.input-icon::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Ícone de calendário */
+.icon-calendar::before {
+  content: "\f073";
+}
+
+/* Ícone de dinheiro */
+.icon-money::before {
+  content: "\f155";
+}
+
+
+.advanced-filters input[type="date"],
+.advanced-filters input[type="number"] {
+  width: 100%;
+  background: var(--bg-card);
+  border: none;
+  padding: 10px 15px 10px 40px !important;
+  /* igual search */
+  border-radius: var(--radius);
+  color: white;
+  font-size: 0.95rem;
+  height: 42px;
+  /* igual search */
+}
+
+.advanced-filters input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 2px var(--blue);
+}
+
+/* ============================
+   ÍCONES NOS INPUTS
+   ============================ */
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 16px;
+  pointer-events: none;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* calendário */
+.icon-calendar::before {
+  content: "\f073";
+}
+
+/* dinheiro */
+.icon-money::before {
+  content: "\f155";
+}
+
+
+
+
+/*novos filtros fim*/
+.filter-select {
+  background: var(--bg-card);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+}
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+.table-container {
+  background: var(--bg-panel);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.data-table th {
+  color: var(--text-secondary);
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.actions-edit button {
+  background: #fbbf24;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #000;
+}
+
+.actions-delete button {
+  background: var(--red);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.status-cancelado {
+  color: var(--red);
+  font-weight: bold;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+
+
+
+  }
+
+     .filter-bar {
+       margin-top: 60px !important;
+       /* empurra o input para baixo do menu-btn */
+     }
+  .header-title {
+    display: none;
+  }
+
+  .sidebar {
+    transform: translateX(-260px);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .cont-prin {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-select,
+  .btn {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .cont-prin {
+    max-width: 1600px;
+    margin: auto;
+    margin-left: var(--sidebar-width);
+  }
+}
+
+
+
+/* Mobile: tabela -> cards */
+@media (max-width: 760px) {
+
+  .table-responsive table,
+  .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive td,
+  .table-responsive tr {
+    display: block;
+  }
+
+    .advanced-filters {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+  
+    .advanced-filters input {
+      width: 100%;
+    }
+
+  .table-responsive thead {
+    display: none;
+  }
+
+  .table-responsive tr {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    padding: 10px;
+  }
+
+  .table-responsive td {
+    padding: 6px 0;
+    border: none;
+  }
+
+  .table-responsive td:before {
+    /* labels for mobile rows */
+    content: attr(data-label);
+    display: inline-block;
+    font-weight: 600;
+    width: 110px;
+  }
+
+  .table-container {
+    padding: 10px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* =========================================================
+   CORREÇÃO — DEIXAR A LISTA NO TOPO DA PÁGINA
+   ========================================================= */
+.dashboard-container,
+.main-content,
+.cont-prin,
+.table-container,
+header,
+main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.header-title {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
