@@ -1,1 +1,0 @@
-// Aqui você pode adicionar interações futuras, se desejar
